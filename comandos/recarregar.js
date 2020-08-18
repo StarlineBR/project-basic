@@ -1,6 +1,6 @@
   
 module.exports = {
-	name: 'reload',
+	name: 'recarregar',
 	description: 'Recarrega um comando',
 	args: true,
 	execute(message, args) {
