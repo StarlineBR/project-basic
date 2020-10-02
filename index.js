@@ -65,12 +65,28 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args);
+		command.execute(message, args, client);
 	} catch (error) {
 		console.error(error);
 		message.reply('\`❌\`│ ocorreu um erro ao tentar executar esse comando!');
     }
 });
+client.on("message", async message => {// sistema anti-selfbot
+	if(message.channel.type === "dm") return;
+	if(message.author.bot === true){//ser for mensagem de BOT vai ignorar
+		return
+		}else{
+	for (let embed of message.embeds) {
+		if(embed.url === undefined){// se o url for undefined significa que o usuário usou selfbot.
+			return message.channel.send("url da embed está undefined, usuário usou selfbot.")
+			//ação pra punir o usuário que usou selfbot
+
+		}else if(embed.url){// se o url for true significa que não é selfbot.
+			return message.channel.send("url da embed está true, usuário não usou selfbot.")	
+			//ação para ignorar 
+		}}
+	}
+})
 client.on("message", async message => {
     if(message.channel.type === "dm") return;
     if(message.content.startsWith(`<@${client.user.id}>`)|| message.content.startsWith(`<@!${client.user.id}>`)){ //  MOBILE / PC
@@ -85,4 +101,5 @@ client.on("message", async message => {
   
   }
 })
+
 client.login(token);
