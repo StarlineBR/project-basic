@@ -72,20 +72,19 @@ client.on('message', message => {
     }
 });
 client.on("message", async message => {// sistema anti-selfbot
-	if(message.channel.type === "dm") return;
-	if(message.author.bot === true){//ser for mensagem de BOT vai ignorar
-		return
-		}else{
-	for (let embed of message.embeds) {
-		if(embed.url === undefined){// se o url for undefined significa que o usuário usou selfbot.
-			return message.channel.send("url da embed está undefined, usuário usou selfbot.")
-			//ação pra punir o usuário que usou selfbot
-
-		}else if(embed.url){// se o url for true significa que não é selfbot.
-			return message.channel.send("url da embed está true, usuário não usou selfbot.")	
-			//ação para ignorar 
-		}}
-	}
+	if(message.channel.type === "dm")return;
+	if(message.author.bot === true)return;//ser for mensagem de BOT vai ignorar
+        if (message.channel.type === 'text' && !message.channel.permissionsFor(client.user).has('SEND_MESSAGES'))return; 
+	    for (let embed of message.embeds) {
+                if(embed.type === "rich"){
+                    return message.channel.send("Usuário usou selfbot.")
+                    //ação pra punir o usuário que usou selfbot
+                }else{
+                    return message.channel.send("Usuário não usou selfbot.")	
+                    //ação para ignorar 
+                }
+            }
+	
 })
 client.on("message", async message => {
     if(message.channel.type === "dm") return;
