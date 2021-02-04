@@ -71,9 +71,9 @@ client.on('message', message => {
 		message.reply('\`❌\`│ ocorreu um erro ao tentar executar esse comando!');
     }
 });
-client.on("message", async message => {// sistema anti-selfbot
+client.on("message", async message => {// sistema anti-selfbot - https://support.discord.com/hc/pt-br/articles/115002192352-Contas-de-usuário-automatizadas-auto-bots
 	if(message.channel.type === "dm")return;
-	if(message.author.bot === true)return;//ser for mensagem de BOT vai ignorar
+	if(message.author.bot === true)return; //Vai ignorar mensagens de BOT
         if (message.channel.type === 'text' && !message.channel.permissionsFor(client.user).has('SEND_MESSAGES'))return; 
 	    for (let embed of message.embeds) {
                 if(embed.type === "rich"){
