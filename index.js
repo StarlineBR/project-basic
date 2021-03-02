@@ -2,7 +2,8 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'], ws: { intents: Intents.ALL } })
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./comandos').filter(file => file.endsWith('.js'));
