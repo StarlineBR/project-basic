@@ -1,6 +1,7 @@
+const Discord = require('discord.js')
 const fs = require('fs');
 const {  prefix, token } = require('./config.json');
-const { Discord, Client, Intents } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'], ws: { intents: Intents.ALL } })
 client.commands = new Discord.Collection();
 
